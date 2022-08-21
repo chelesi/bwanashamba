@@ -1,0 +1,91 @@
+{% extends 'base.html' %} 
+
+
+{% block title %} | Welcome{% endblock %}
+
+{% block content %}
+ 
+<!-- Alerts -->
+
+
+<!-- Listings -->
+<section id="listings" class="py-5">
+  <div class="container">
+    <h3 class="text-center mb-3">Registered Vertenarians</h3>
+    <div class="row">
+      {% if listings %}
+        {% for listing in listings %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="" />
+              <div class="card-img-overlay">
+                <h2>
+                 <!----<span class="badge badge-secondary text-white">Tsh/={{ listing.price}}</span>---> 
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="listing-heading text-center">
+                  <h4 class="text-primary">{{ listing.title }}</h4>
+                  <p>
+                    <i class="fas fa-map-marker text-secondary"></i> {{ listing.city }} {{ listing.state }},
+                    {{ listing.zipcode }}
+                  </p>
+                </div>
+                <hr />
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-money-check-alt"></i> Cash: {{ listing.sqft }} <!--Ichanged Sqft to cash-->
+                  </div>
+                  <div class="col-6"><i class="fas fa-user"></i> Mtalaam: {{ listing.garage }}</div>
+                </div>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6"><i class="fas fa-user"></i> Experts: {{ listing.experts }}</div>
+                  <div class="col-6"><i class="fas fa-leaf"></i> Crops: {{ listing.Crops }}</div>
+                </div>
+                <hr />
+                <div class="row py-2 text-secondary">
+                  <div class="col-6"><i class="fas fa-user"></i> {{ listing.realtor }}</div>
+                </div>
+                <div class="row text-secondary pb-2">
+                  <div class="col-6"><i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
+                </div>
+                <hr />
+                <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block"
+                  >More Info</a
+                >
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-md-12">
+          <p>No Vertenarians available</p>
+        </div>
+      {% endif %}
+</section>
+
+<section id="" class="py-5 text-white" style="background-color:rgb(14, 145, 165);">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <i class="fas fa-user fa-4x mr-4"  style="color: rgb(35, 172, 99);"></i>
+        <hr />
+        <h3>Consulting Services</h3>
+        
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-leaf fa-4x mr-4"  style="color: rgb(35, 172, 99);"></i>
+        <hr />
+        <h3>Agricutural  Management</h3>
+       
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-money-check-alt fa-4x mr-4"  style="color: rgb(35, 172, 99);"></i>
+        <hr />
+        <h3>Buying  & Selling</h3>
+        
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+
+{% block title %} | Welcome{% endblock %}
+
+{% block content %}
+ <!---Start -Slide Show style contents-->
+
+ <title>Bawana Shamba</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta content="text/html; charset=iso-8859-2" http-equiv="Content-Type">
+ <link rel="stylesheet" href="4/w3.css">
+<style>
+ .mySlides {display: none;}
+ 
+ </style>
+
+<!--End Slide  style Show contents- And below are slide show images --->
+<div class="w3-content w3-section" style="max-width:100%">
+  <img class="mySlides" src="/static/img/farm3.jpg" style="height:50%">
+  <img class="mySlides" src="/static/img/farm2.jpg" style="height:50%">
+  <img class="mySlides" src="/static/img/farm1.jpg" style="height:50%">
+  <img class="mySlides" src="/static/img/farm4.jpg" style="height:50%">
+  <img class="mySlides" src="/static/img/farm5.jpg" style="height:50%">
+  <img class="mySlides" src="/static/img/farm6.jpg" style="height:50%">
+
+
+  <!--Slise Show java script-->
+  <script>
+    var myIndex = 0;
+    carousel();
+    
+    function carousel() {
+      var i;
+      var x = document.getElementsByClassName("mySlides");
+      for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";  
+      }
+      myIndex++;
+      if (myIndex > x.length) {myIndex = 1}    
+      x[myIndex-1].style.display = "block";  
+      setTimeout(carousel, 2000); // Change image every 2 seconds
+    }
+    </script>
+    <!--End slide show java script -->
+</div>
+
+
+
+<!-- Listings -->
+<section id="listings" class="py-5">
+  <div class="container">
+    <h3 class="text-center mb-3">Latest Updates</h3>
+    <div class="row">
+      {% if listings %}
+        {% for listing in listings %}
+        <div class="col-md-6 col-lg-4 mb-4">
+            <div class="card listing-preview">
+              <img class="card-img-top" src="{{ listing.photo_main.url }}" alt="" />
+              <div class="card-img-overlay">
+                <h2>
+                 <!----<span class="badge badge-secondary text-white">Tsh/={{ listing.price}}</span>---> 
+                </h2>
+              </div>
+              <div class="card-body">
+                <div class="listing-heading text-center">
+                  <h4 class="text-primary">{{ listing.title }}</h4>
+                  <p>
+                    <i class="fas fa-map-marker text-secondary"></i> {{ listing.city }} {{ listing.state }},
+                    {{ listing.zipcode }}
+                  </p>
+                </div>
+                <hr />
+                <div class="row py-2 text-secondary">
+                  <div class="col-6">
+                    <i class="fas fa-money-check-alt"></i> Cash: {{ listing.sqft }} <!--Ichanged Sqft to cash-->
+                  </div>
+                  <div class="col-6"><i class="fas fa-user"></i> Mtalaam: {{ listing.garage }}</div>
+                </div>
+                <div class="row py-2 text-secondary">
+                  <div class="col-6"><i class="fas fa-user"></i> Experts: {{ listing.experts }}</div>
+                  <div class="col-6"><i class="fas fa-leaf"></i> Crops: {{ listing.Crops }}</div>
+                </div>
+                <hr />
+                <div class="row py-2 text-secondary">
+                  <div class="col-6"><i class="fas fa-user"></i> {{ listing.realtor }}</div>
+                </div>
+                <div class="row text-secondary pb-2">
+                  <div class="col-6"><i class="fas fa-clock"></i> {{ listing.list_date | timesince }}</div>
+                </div>
+                <hr />
+                <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block"
+                  >More Info</a
+                >
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-md-12">
+          <p>No listings available</p>
+        </div>
+      {% endif %}
+</section>
+
+<!------End of listing-->
+
+
+<section id="showcase" >
+  <div class="container text-center" >
+    <div class="home-search p-5" style="background-color:rgb(40, 166, 186);">
+      <div class="overlay p-5" style="background-color:rgb(40, 166, 186);">
+        <h1 class="display-4 mb-4"> Bwana Shamba Farming</h1>
+        <p class="lead">
+          Bwana Shamba Farming management System is the operation, control, educative , and oversight<br>
+          of Farming Systems for higher profits to farmers.This can include residential, commercial, and land real estate.
+        </p>
+
+        <div class="search">
+          <form action="{% url 'search' %}">
+            <!-- Form Row 1  Weka ziwe link user akibonyeza aletewe form-->
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <section id="bc" class="mt-3">
+                  <div class="container">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                          <a href="{% url 'Agroengineer' %}" style="font-family: italic;"> <i class="fas fa-user-secret"  style="color: rgb(35, 172, 99);"></i> AGROENGINEER</a>
+                        </li>
+                      </ol>
+                    </nav>
+                  </div>
+                </section>
+              
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <section id="bc" class="mt-3">
+                  <div class="container">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                          <a href="{% url 'Agronomist' %}" style="font-family: italic;"> <i class="fas fa-coffee"  style="color: rgb(35, 172, 99);"></i> AGRONOMIST</a>
+                        </li>
+                      </ol>
+                    </nav>
+                  </div>
+                </section>
+               
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <section id="bc" class="mt-3">
+                  <div class="container">
+                    <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                          <a href="{% url 'Agroengineer' %}" style="font-family: italic;"> <i class="fas fa-apple-alt"  style="color: rgb(35, 172, 99);"></i> VETENARIAN</a>
+                        </li>
+                      </ol>
+                    </nav>
+                  </div>
+                </section>
+                <p style="font-family: italic;"></p>
+                </select>
+              </div>
+            </div>
+            <!-- Form Row 2 -->
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                 <p style="font-family: italic;">CUSTOMER REVIEW</p>
+              </div>
+              <div class="col-md-6 mb-3">
+                  <p style="font-family: italic;">KILIMO TIPS</p>
+              </div>
+            </div>
+
+            <a   href="#" style="background-color:rgb(40, 166, 186);">
+              <i class="fas fa-leaf"  style="color: rgb(35, 172, 99);"></i> Bwana Shamba Tz
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br>
+<!-- Alerts -->
+
+
+
+<section id="" class="py-5 text-white" style="background-color:rgb(14, 145, 165);">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <i class="fas fa-user fa-4x mr-4"  style="color: rgb(35, 172, 99);"></i>
+        <hr />
+        <h3>Consulting Services</h3>
+        <p>
+          Our management consulting services focus on our clients' most critical
+          issues and opportunities: strategy, marketing, organization, operations, technology,
+          transformation, digital, advanced analytics, corporate finance,
+          mergers & acquisitions and sustainability across all industries and geographies.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-leaf fa-4x mr-4"  style="color: rgb(35, 172, 99);"></i>
+        <hr />
+        <h3>Agricutural  Management</h3>
+        <p>
+          Agricutural management is the daily oversight of Tanzanians residents,
+          commercial, or industrial real estate by a third-party contractor.
+          Generally, famers  experts take responsibility for day-to-day repairs and ongoing activities,
+          land resouce utilization.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-money-check-alt fa-4x mr-4"  style="color: rgb(35, 172, 99);"></i>
+        <hr />
+        <h3>Buying  & Selling</h3>
+        <p>
+          Buying and selling  can provide profits and reward to curstomers because you know you can return to your home.
+          Selling a crop and then you improve daily running costs of Agricultural incurs costs,
+          so it may be cheaper to Buy  or Sell crops throug this systerm.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
